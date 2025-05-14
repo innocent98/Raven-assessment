@@ -540,7 +540,7 @@ input, select {
     width: 8px;
     height: 40px;
 }
-
+ 
 .chart-area__volume-bar--up {
     background-color: var(--color-accent);
 }
