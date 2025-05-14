@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sisyphus Trading Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__logo-container">
+            <div class="header__logo">
+                <i class="fas fa-bolt header__logo-icon"></i>
+                <span class="header__logo-text">Sisyphus</span>
+            </div>
+        </div>
+        
+        <nav class="header__nav">
+            <ul class="header__nav-list">
+                <li class="header__nav-item header__nav-item--active"><a href="#" class="header__nav-link">Exchange</a></li>
+                <li class="header__nav-item"><a href="#" class="header__nav-link">Wallets</a></li>
+                <li class="header__nav-item"><a href="#" class="header__nav-link">Roqqu Hub</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header__user-section">
+            <div class="header__user">
+                <div class="header__user-avatar">
+                    <img src="https://via.placeholder.com/32" alt="User avatar" class="header__user-img">
+                </div>
+                <span class="header__user-name">Olakunle Te...</span>
+                <i class="fas fa-chevron-right header__user-icon"></i>
+            </div>
+            <div class="header__language">
+                <i class="fas fa-globe header__language-icon"></i>
+            </div>
+            <div class="header__login">
+                <i class="fas fa-sign-in-alt header__login-icon"></i>
+            </div>
+        </div>
+        
+        <!-- Mobile menu button -->
+        <button class="header__mobile-menu">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Trading Pair Info -->
+    <section class="trading-pair">
+        <div class="trading-pair__container">
+            <div class="trading-pair__selector">
+                <div class="trading-pair__icons">
+                    <div class="trading-pair__icon trading-pair__icon--btc">₿</div>
+                    <div class="trading-pair__icon trading-pair__icon--usdt">$</div>
+                </div>
+                <div class="trading-pair__name">BTC/USDT</div>
+                <i class="fas fa-chevron-down trading-pair__dropdown-icon"></i>
+            </div>
+            
+            <div class="trading-pair__price">
+                <div class="trading-pair__current-price">$20,634</div>
+            </div>
+        </div>
+        
+        <div class="trading-pair__stats">
+            <div class="trading-pair__stat">
+                <div class="trading-pair__stat-label">
+                    <i class="fas fa-clock"></i>
+                    24h change
+                </div>
+                <div class="trading-pair__stat-value trading-pair__stat-value--positive">520.80 +1.25%</div>
+            </div>
+            
+            <div class="trading-pair__stat">
+                <div class="trading-pair__stat-label">
+                    <i class="fas fa-arrow-up"></i>
+                    24h high
+                </div>
+                <div class="trading-pair__stat-value">520.80 +1.25%</div>
+            </div>
+            
+            <div class="trading-pair__stat">
+                <div class="trading-pair__stat-label">
+                    <i class="fas fa-arrow-down"></i>
+                    24h low
+                </div>
+                <div class="trading-pair__stat-value">520.80 +1.25%</div>
+            </div>
+            
+            <div class="trading-pair__stat">
+                <div class="trading-pair__stat-label">
+                    <i class="fas fa-chart-bar"></i>
+                    24h volume
+                </div>
+                <div class="trading-pair__stat-value">75,655.26</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mobile Tabs -->
+    <div class="mobile-tabs">
+        <button class="mobile-tabs__btn mobile-tabs__btn--active">Charts</button>
+        <button class="mobile-tabs__btn">Orderbook</button>
+        <button class="mobile-tabs__btn">Recent trades</button>
+    </div>
+
+    <!-- Chart Controls -->
+    <div class="chart-controls">
+        <div class="chart-controls__time-frames">
+            <button class="chart-controls__time-btn">1H</button>
+            <button class="chart-controls__time-btn">2H</button>
+            <button class="chart-controls__time-btn">4H</button>
+            <button class="chart-controls__time-btn chart-controls__time-btn--active">1D</button>
+            <button class="chart-controls__time-btn">1W</button>
+            <button class="chart-controls__time-btn">1M</button>
+            <button class="chart-controls__time-btn chart-controls__time-btn--dropdown">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
+        
+        <div class="chart-controls__indicators">
+            <button class="chart-controls__indicator-btn">
+                <i class="fas fa-chart-line"></i>
+                Fx Indicators
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Trading Section -->
+    <div class="trading-section">
+        <!-- Chart Area -->
+      <div class="chart-area">
+        <div class="chart-area__info">
+            <div class="chart-area__pair">BTC/USD</div>
+            <div class="chart-area__stats">
+                <div class="chart-area__stat chart-area__stat--open">O 36,641.54</div>
+                <div class="chart-area__stat chart-area__stat--high">H 36,641.54</div>
+                <div class="chart-area__stat chart-area__stat--low">L 36,641.54</div>
+                <div class="chart-area__stat chart-area__stat--close">C 36,641.54</div>
+                <div class="chart-area__stat chart-area__stat--change">Change: 2.33%</div>
+                <div class="chart-area__stat chart-area__stat--amplitude">Amplitude: 5.59%</div>
+            </div>
+        </div>
+        
+        <div class="chart-area__candlestick">
+            <!-- Candlestick chart would be implemented with a library in a real app -->
+            <div class="chart-area__placeholder">
+                <!-- Simplified chart representation -->
+                <div class="chart-area__candle chart-area__candle--up"></div>
+                <div class="chart-area__candle chart-area__candle--down"></div>
+                <div class="chart-area__candle chart-area__candle--up"></div>
+                <div class="chart-area__candle chart-area__candle--up"></div>
+                <div class="chart-area__candle chart-area__candle--down"></div>
+                <div class="chart-area__candle chart-area__candle--up"></div>
+                <div class="chart-area__candle chart-area__candle--down"></div>
+                <div class="chart-area__candle chart-area__candle--up"></div>
+                <div class="chart-area__price-line">36,641.20</div>
+            </div>
+        </div>
+        
+        <div class="chart-area__volume">
+            <!-- Volume chart would be implemented with a library in a real app -->
+            <div class="chart-area__volume-bars">
+                <div class="chart-area__volume-bar chart-area__volume-bar--up"></div>
+                <div class="chart-area__volume-bar chart-area__volume-bar--down"></div>
+                <div class="chart-area__volume-bar chart-area__volume-bar--up"></div>
+                <div class="chart-area__volume-bar chart-area__volume-bar--up"></div>
+                <div class="chart-area__volume-bar chart-area__volume-bar--down"></div>
+                <div class="chart-area__volume-bar chart-area__volume-bar--up"></div>
+            </div>
+            <div class="chart-area__volume-info">
+                <div class="chart-area__volume-label">Vol(BTC): 66.254k</div>
+                <div class="chart-area__volume-label">Vol(USDT): 2.148B</div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Order Book -->
+        <section class="order-book">
+            <div class="order-book__header">
+                <div class="order-book__tabs">
+                    <button class="order-book__tab order-book__tab--active">Order Book</button>
+                    <button class="order-book__tab">Recent trades</button>
+                </div>
+                <div class="order-book__view-selector">
+                    
+                    <div class="order-book__dropdown">
+                        <span>10</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="order-book__table-header">
+                <div class="order-book__column-header">Price <span>(USD)</span></div>
+                <div class="order-book__column-header">Amounts <span>(BTC)</span></div>
+                <div class="order-book__column-header">Total</div>
+            </div>
+            
+            <div class="order-book__sell-orders">
+                <!-- Sell Orders -->
+                <div class="order-book__order order-book__order--sell">
+                    <div class="order-book__price order-book__price--sell">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--sell"></div>
+                </div>
+                <div class="order-book__order order-book__order--sell">
+                    <div class="order-book__price order-book__price--sell">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--sell"></div>
+                </div>
+                <div class="order-book__order order-book__order--sell">
+                    <div class="order-book__price order-book__price--sell">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--sell"></div>
+                </div>
+                <div class="order-book__order order-book__order--sell">
+                    <div class="order-book__price order-book__price--sell">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--sell"></div>
+                </div>
+                <div class="order-book__order order-book__order--sell">
+                    <div class="order-book__price order-book__price--sell">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--sell"></div>
+                </div>
+            </div>
+            
+            <div class="order-book__spread">
+                <div class="order-book__spread-price">
+                    <span style="color: lightgreen;">36,641.20</span>
+                    <i class="fa-solid fa-arrow-up"></i>
+                    <span>36,641.20</span>
+                </div>
+            </div>
+            
+            <div class="order-book__buy-orders">
+                <!-- Buy Orders -->
+                <div class="order-book__order order-book__order--buy">
+                    <div class="order-book__price order-book__price--buy">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--buy"></div>
+                </div>
+                <div class="order-book__order order-book__order--buy">
+                    <div class="order-book__price order-book__price--buy">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--buy"></div>
+                </div>
+                <div class="order-book__order order-book__order--buy">
+                    <div class="order-book__price order-book__price--buy">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--buy"></div>
+                </div>
+                <div class="order-book__order order-book__order--buy">
+                    <div class="order-book__price order-book__price--buy">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--buy"></div>
+                </div>
+                <div class="order-book__order order-book__order--buy">
+                    <div class="order-book__price order-book__price--buy">36920.12</div>
+                    <div class="order-book__amount">0.758965</div>
+                    <div class="order-book__total">28,020.98</div>
+                    <div class="order-book__depth order-book__depth--buy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Order Form -->
+        <div class="order-form">
+            <div class="order-form__tabs">
+                <button class="order-form__tab-btn order-form__tab-btn--active">Buy</button>
+                <button class="order-form__tab-btn">Sell</button>
+            </div>
+            
+            <div class="order-form__types">
+                <button class="order-form__type-btn order-form__type-btn--active">Limit</button>
+                <button class="order-form__type-btn">Market</button>
+                <button class="order-form__type-btn">Stop-Limit</button>
+            </div>
+            
+            <div class="order-form__inputs">
+                <div class="order-form__input-group">
+                    <label class="order-form__label">
+                        Limit price
+                        <i class="fas fa-info-circle order-form__info-icon"></i>
+                    </label>
+                    <div class="order-form__input-wrapper">
+                        <input type="text" class="order-form__input" value="0.00">
+                        <span class="order-form__input-suffix">USD</span>
+                    </div>
+                </div>
+                
+                <div class="order-form__input-group">
+                    <label class="order-form__label">
+                        Amount
+                        <i class="fas fa-info-circle order-form__info-icon"></i>
+                    </label>
+                    <div class="order-form__input-wrapper">
+                        <input type="text" class="order-form__input" value="0.00">
+                        <span class="order-form__input-suffix">USD</span>
+                    </div>
+                </div>
+                
+                <div class="order-form__input-group">
+                    <label class="order-form__label">
+                        Type
+                        <i class="fas fa-info-circle order-form__info-icon"></i>
+                    </label>
+                    <div class="order-form__select-wrapper">
+                        <select class="order-form__select">
+                            <option>Good till cancelled</option>
+                        </select>
+                        <i class="fas fa-chevron-down order-form__select-icon"></i>
+                    </div>
+                </div>
+                
+                <div class="order-form__checkbox-group">
+                    <input type="checkbox" id="post-only" class="order-form__checkbox" checked>
+                    <label for="post-only" class="order-form__checkbox-label">
+                        Post Only
+                        <i class="fas fa-info-circle order-form__info-icon"></i>
+                    </label>
+                </div>
+                
+                <div class="order-form__total">
+                    <div class="order-form__total-label">Total</div>
+                    <div class="order-form__total-value">0.00</div>
+                </div>
+                
+                <button class="order-form__submit-btn">Buy BTC</button>
+                
+                <div class="order-form__account">
+                    <div class="order-form__account-row">
+                        <div class="order-form__account-label">Total account value</div>
+                        <div class="order-form__account-value">
+                            <span>0.00</span>
+                            <select class="order-form__currency-select">
+                                <option>NGN</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="order-form__account-row">
+                        <div class="order-form__account-label">Open Orders</div>
+                        <div class="order-form__account-value">0.00</div>
+                    </div>
+                    
+                    <div class="order-form__account-row">
+                        <div class="order-form__account-label">Available</div>
+                        <div class="order-form__account-value">0.00</div>
+                    </div>
+                </div>
+                
+                <button class="trading-form__deposit-btn">Deposit</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Buy/Sell Buttons -->
+    <div class="mobile-actions">
+        <button class="mobile-actions__btn mobile-actions__btn--buy">Buy</button>
+        <button class="mobile-actions__btn mobile-actions__btn--sell">Sell</button>
+    </div>
+
+    <!-- Order History Tabs -->
+    <div class="order-history">
+        <div class="order-history__tabs">
+            <button class="order-history__tab-btn order-history__tab-btn--active">Open Orders</button>
+            <button class="order-history__tab-btn">Positions</button>
+            <button class="order-history__tab-btn">Order History</button>
+            <button class="order-history__tab-btn">Trade History</button>
+        </div>
+        
+        <div class="order-history__content">
+            <div class="order-history__empty">
+                <h3 class="order-history__empty-title">No Open Orders</h3>
+                <p class="order-history__empty-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.<br>Id pulvinar nullam sit imperdiet pulvinar.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__copyright">
+            <p>&copy; 2025 Sisyphus. All rights reserved.</p>
+        </div>
+        
+        <div class="footer__social">
+            <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-discord"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-github"></i></a>
+        </div>
+        
+        <div class="footer__contact">
+            <a href="#" class="footer__contact-link">Contact Us</a>
+        </div>
+    </footer>
+</body>
+</html>
