@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sisyphus - Authentication</title>
+    <link rel="stylesheet" href="auth-styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header__logo-container">
+            <div class="header__logo">
+                <i class="fas fa-bolt header__logo-icon"></i>
+                <span class="header__logo-text">Sisyphus</span>
+            </div>
+        </div>
+        
+        <div class="header__actions">
+            <button class="header__action-btn">
+                <i class="fas fa-globe"></i>
+            </button>
+            <button class="header__action-btn">
+                <i class="fas fa-question-circle"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="auth-container">
+            <div class="auth-card">
+                <div class="auth-card__header">
+                    <h1 class="auth-card__title">Sign In</h1>
+                    <p class="auth-card__subtitle">Enter your email to continue</p>
+                </div>
+                
+                <form class="auth-form">
+                    <div class="auth-form__group">
+                        <label for="email" class="auth-form__label">Email Address</label>
+                        <div class="auth-form__input-wrapper">
+                            <i class="fas fa-envelope auth-form__input-icon"></i>
+                            <input type="email" id="email" class="auth-form__input" placeholder="your.email@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="auth-form__submit-btn">Continue</button>
+                    
+                    <div class="auth-form__options">
+                        <span class="auth-form__option-text">Or continue with</span>
+                        <div class="auth-form__social-buttons">
+                            <button type="button" class="auth-form__social-btn">
+                                <i class="fab fa-google"></i>
+                            </button>
+                            <button type="button" class="auth-form__social-btn">
+                                <i class="fab fa-github"></i>
+                            </button>
+                            <button type="button" class="auth-form__social-btn">
+                                <i class="fab fa-twitter"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Profile Preview Section (Initially Hidden) -->
+            <div class="profile-preview">
+                <div class="profile-preview__header">
+                    <h2 class="profile-preview__title">Profile Preview</h2>
+                    <p class="profile-preview__subtitle">Information associated with your email</p>
+                </div>
+                
+                <div class="profile-preview__content">
+                    <div class="profile-preview__gravatar">
+                        <div class="profile-preview__avatar">
+                            <!-- Gravatar would be loaded here dynamically -->
+                            <img src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y" alt="Gravatar" class="profile-preview__avatar-img">
+                        </div>
+                        <div class="profile-preview__info">
+                            <h3 class="profile-preview__name">User Name</h3>
+                            <p class="profile-preview__email">user.email@example.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-preview__github">
+                        <div class="profile-preview__section-header">
+                            <i class="fab fa-github profile-preview__section-icon"></i>
+                            <h3 class="profile-preview__section-title">GitHub Repositories</h3>
+                        </div>
+                        
+                        <ul class="repo-list">
+                            <!-- Repositories would be loaded here dynamically -->
+                            <li class="repo-list__item">
+                                <div class="repo-list__info">
+                                    <h4 class="repo-list__name">project-name</h4>
+                                    <p class="repo-list__description">Project description goes here. This is a sample description for the repository.</p>
+                                </div>
+                                <div class="repo-list__stats">
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-star"></i>
+                                        <span>24</span>
+                                    </span>
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span>8</span>
+                                    </span>
+                                </div>
+                            </li>
+                            
+                            <li class="repo-list__item">
+                                <div class="repo-list__info">
+                                    <h4 class="repo-list__name">another-project</h4>
+                                    <p class="repo-list__description">Another sample project description. This would show details about the repository.</p>
+                                </div>
+                                <div class="repo-list__stats">
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-star"></i>
+                                        <span>42</span>
+                                    </span>
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span>15</span>
+                                    </span>
+                                </div>
+                            </li>
+                            
+                            <li class="repo-list__item">
+                                <div class="repo-list__info">
+                                    <h4 class="repo-list__name">cool-library</h4>
+                                    <p class="repo-list__description">A library with useful utilities and functions for web development.</p>
+                                </div>
+                                <div class="repo-list__stats">
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-star"></i>
+                                        <span>156</span>
+                                    </span>
+                                    <span class="repo-list__stat">
+                                        <i class="fas fa-code-branch"></i>
+                                        <span>37</span>
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="profile-preview__actions">
+                        <button class="profile-preview__action-btn profile-preview__action-btn--primary">Continue to Dashboard</button>
+                        <button class="profile-preview__action-btn profile-preview__action-btn--secondary">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer__copyright">
+            <p>&copy; 2025 Sisyphus. All rights reserved.</p>
+        </div>
+        
+        <div class="footer__links">
+            <a href="#" class="footer__link">Terms of Service</a>
+            <a href="#" class="footer__link">Privacy Policy</a>
+            <a href="#" class="footer__link">Contact Us</a>
+        </div>
+        
+        <div class="footer__social">
+            <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-telegram"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-discord"></i></a>
+            <a href="#" class="footer__social-link"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+</body>
+</html>
