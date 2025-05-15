@@ -8,33 +8,35 @@ function OrderForm() {
   const { selectedPair } = useTradingPairs();
   const [orderType, setOrderType] = useState('buy');
   const [orderMode, setOrderMode] = useState('limit');
-  const [price, setPrice] = useState(selectedPair.price.toFixed(2));
+  const [price, setPrice] = useState('0.00');
   const [amount, setAmount] = useState('0.00');
   const [total, setTotal] = useState('0.00');
   const [postOnly, setPostOnly] = useState(true);
   
   // Update price when selected pair changes
   useEffect(() => {
-    setPrice(selectedPair.price.toFixed(2));
-    calculateTotal();
+    if (selectedPair) {
+      setPrice(selectedPair.price.toFixed(selectedPair.price < 1 ? 6 : 2));
+      calculateTotal(selectedPair.price, amount);
+    }
   }, [selectedPair]);
   
   // Calculate total when price or amount changes
-  useEffect(() => {
-    calculateTotal();
-  }, [price, amount]);
-  
-  const calculateTotal = () => {
-    const calculatedTotal = parseFloat(price) * parseFloat(amount) || 0;
+  const calculateTotal = (priceValue, amountValue) => {
+    const calculatedTotal = parseFloat(priceValue) * parseFloat(amountValue) || 0;
     setTotal(calculatedTotal.toFixed(2));
   };
   
   const handlePriceChange = (e) => {
-    setPrice(e.target.value);
+    const newPrice = e.target.value;
+    setPrice(newPrice);
+    calculateTotal(newPrice, amount);
   };
   
   const handleAmountChange = (e) => {
-    setAmount(e.target.value);
+    const newAmount = e.target.value;
+    setAmount(newAmount);
+    calculateTotal(price, newAmount);
   };
   
   const handlePercentageClick = (percentage) => {
@@ -42,6 +44,7 @@ function OrderForm() {
     const availableBalance = 1; // 1 BTC
     const calculatedAmount = (availableBalance * percentage / 100).toFixed(6);
     setAmount(calculatedAmount);
+    calculateTotal(price, calculatedAmount);
   };
   
   const handleSubmit = (e) => {
@@ -52,8 +55,12 @@ function OrderForm() {
       return;
     }
     
-    alert(`Order placed: ${orderType.toUpperCase()} ${amount} ${selectedPair.base} at $${price} for a total of $${total}`);
+    alert(`Order placed: ${orderType.toUpperCase()} ${amount} ${selectedPair?.base || 'BTC'} at $${price} for a total of $${total}`);
   };
+  
+  if (!selectedPair) {
+    return null;
+  }
   
   return (
     <div className="order-form">
@@ -106,7 +113,7 @@ function OrderForm() {
               value={price}
               onChange={handlePriceChange}
             />
-            <span className="order-form__input-suffix">USD</span>
+            <span className="order-form__input-suffix">{selectedPair.quote}</span>
           </div>
         </div>
         
@@ -122,7 +129,7 @@ function OrderForm() {
               value={amount}
               onChange={handleAmountChange}
             />
-            <span className="order-form__input-suffix">BTC</span>
+            <span className="order-form__input-suffix">{selectedPair.base}</span>
           </div>
           
           <div className="order-form__percentage-buttons">
@@ -162,7 +169,7 @@ function OrderForm() {
         
         <div className="order-form__total">
           <div className="order-form__total-label">Total</div>
-          <div className="order-form__total-value">{total}</div>
+          <div className="order-form__total-value">{total} {selectedPair.quote}</div>
         </div>
         
         <button 
@@ -183,7 +190,7 @@ function OrderForm() {
             <div className="order-form__account-value">
               <span>0.00</span>
               <select className="order-form__currency-select">
-                <option>NGN</option>
+                <option>{selectedPair.quote}</option>
               </select>
             </div>
           </div>

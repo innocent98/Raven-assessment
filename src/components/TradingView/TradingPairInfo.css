@@ -11,6 +11,7 @@
 .trading-pair__container {
   display: flex;
   align-items: center;
+  gap: var(--spacing-md);
 }
 
 .trading-pair__selector {
@@ -59,7 +60,8 @@
 }
 
 .trading-pair__price {
-  margin-left: var(--spacing-xl);
+  display: flex;
+  flex-direction: column;
 }
 
 .trading-pair__current-price {
@@ -137,9 +139,10 @@
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius-sm);
   margin-top: 4px;
-  max-height: 200px;
+  max-height: 300px;
   overflow-y: auto;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .trading-pair__search-item {
@@ -147,6 +150,11 @@
   cursor: pointer;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.trading-pair__search-item:last-child {
+  border-bottom: none;
 }
 
 .trading-pair__search-item:hover {
@@ -172,13 +180,45 @@
 
 .trading-pair__search-name {
   font-weight: 500;
+  white-space: nowrap;
 }
 
 .trading-pair__search-price {
   margin-left: auto;
   font-size: 12px;
+  white-space: nowrap;
 }
 
+/* Loading and error states */
+.trading-pair--loading,
+.trading-pair--error {
+  justify-content: center;
+  padding: var(--spacing-xl);
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  flex-direction: column;
+  align-items: center;
+}
+
+.trading-pair__spinner {
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
+}
+
+.trading-pair__retry-btn {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  background-color: var(--color-button-background);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-primary);
+  transition: background-color 0.2s;
+}
+
+.trading-pair__retry-btn:hover {
+  background-color: var(--color-button-hover);
+}
+
+/* Responsive adjustments */
 @media (max-width: 1200px) {
   .trading-pair__stats {
     display: none;
@@ -190,14 +230,21 @@
     flex-direction: column;
     align-items: flex-start;
     gap: var(--spacing-md);
+    padding: var(--spacing-md);
   }
   
   .trading-pair__container {
     flex-wrap: wrap;
-    gap: var(--spacing-md);
+    width: 100%;
   }
   
-  .trading-pair__price {
+  .trading-pair__search {
     margin-left: 0;
+    margin-top: var(--spacing-md);
+    width: 100%;
+  }
+  
+  .trading-pair__search-input {
+    width: 100%;
   }
 }

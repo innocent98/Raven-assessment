@@ -12,6 +12,12 @@ function ChartControls() {
   
   const handleIntervalClick = (interval) => {
     setActiveInterval(interval);
+    
+    // Dispatch event for other components to listen to
+    const event = new CustomEvent('chart-interval-change', {
+      detail: { interval }
+    });
+    window.dispatchEvent(event);
   };
   
   const handleDropdownToggle = () => {
@@ -21,6 +27,12 @@ function ChartControls() {
   const handleDropdownItemClick = (interval) => {
     setActiveInterval(interval);
     setShowDropdown(false);
+    
+    // Dispatch event for other components to listen to
+    const event = new CustomEvent('chart-interval-change', {
+      detail: { interval }
+    });
+    window.dispatchEvent(event);
   };
   
   return (

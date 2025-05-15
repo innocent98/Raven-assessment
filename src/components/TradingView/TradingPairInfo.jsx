@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faClock, faArrowUp, faArrowDown, faChartBar, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faClock, faArrowUp, faArrowDown, faChartBar, faSearch, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { useTradingPairs } from '../../contexts/TradingPairsContext';
 import './TradingPairInfo.css';
 
 function TradingPairInfo() {
-  const { selectedPair, setSelectedPair, searchQuery, setSearchQuery, filteredPairs } = useTradingPairs();
+  const { selectedPair, setSelectedPair, searchQuery, setSearchQuery, filteredPairs, isLoading, error } = useTradingPairs();
   const [showResults, setShowResults] = useState(false);
   
   const handleSearchChange = (e) => {
@@ -24,6 +24,30 @@ function TradingPairInfo() {
       setShowResults(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <section className="trading-pair trading-pair--loading">
+        <FontAwesomeIcon icon={faSpinner} spin className="trading-pair__spinner" />
+        <div>Loading trading pairs...</div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="trading-pair trading-pair--error">
+        <div>{error}</div>
+        <button className="trading-pair__retry-btn" onClick={() => window.location.reload()}>
+          Retry
+        </button>
+      </section>
+    );
+  }
+
+  if (!selectedPair) {
+    return null;
+  }
   
   return (
     <section className="trading-pair" onClick={handleClickOutside}>
@@ -48,7 +72,7 @@ function TradingPairInfo() {
         </div>
         
         <div className="trading-pair__price">
-          <div className="trading-pair__current-price">${selectedPair.price.toLocaleString()}</div>
+          <div className="trading-pair__current-price">${selectedPair.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}</div>
         </div>
         
         <div className="trading-pair__search">
@@ -91,7 +115,7 @@ function TradingPairInfo() {
                       className="trading-pair__search-price"
                       style={{ color: pair.change >= 0 ? 'var(--color-accent)' : 'var(--color-negative)' }}
                     >
-                      ${pair.price.toFixed(2)} ({pair.change >= 0 ? '+' : ''}{pair.change}%)
+                      ${pair.price.toFixed(pair.price < 1 ? 6 : 2)} ({pair.change >= 0 ? '+' : ''}{pair.change.toFixed(2)}%)
                     </div>
                   </div>
                 ))
@@ -110,7 +134,7 @@ function TradingPairInfo() {
             24h change
           </div>
           <div className={`trading-pair__stat-value ${selectedPair.change >= 0 ? 'trading-pair__stat-value--positive' : 'trading-pair__stat-value--negative'}`}>
-            {selectedPair.price.toFixed(2)} {selectedPair.change >= 0 ? '+' : ''}{selectedPair.change}%
+            {selectedPair.change >= 0 ? '+' : ''}{selectedPair.change.toFixed(2)}%
           </div>
         </div>
         
@@ -120,7 +144,7 @@ function TradingPairInfo() {
             24h high
           </div>
           <div className="trading-pair__stat-value">
-            {(selectedPair.price * 1.05).toFixed(2)} +1.25%
+            ${selectedPair.high.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
           </div>
         </div>
         
@@ -130,7 +154,7 @@ function TradingPairInfo() {
             24h low
           </div>
           <div className="trading-pair__stat-value">
-            {(selectedPair.price * 0.95).toFixed(2)} +1.25%
+            ${selectedPair.low.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
           </div>
         </div>
         
@@ -139,7 +163,9 @@ function TradingPairInfo() {
             <FontAwesomeIcon icon={faChartBar} />
             24h volume
           </div>
-          <div className="trading-pair__stat-value">75,655.26</div>
+          <div className="trading-pair__stat-value">
+            {selectedPair.volume.toLocaleString(undefined, { maximumFractionDigits: 2 })}
+          </div>
         </div>
       </div>
     </section>

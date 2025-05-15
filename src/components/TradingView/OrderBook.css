@@ -2,6 +2,9 @@
   background-color: var(--color-background-secondary);
   border-radius: var(--border-radius-sm);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
 }
 
 .order-book__header {
@@ -41,6 +44,7 @@
   height: 24px;
   border-radius: var(--border-radius-sm);
   font-size: var(--font-size-xs);
+  cursor: pointer;
 }
 
 .order-book__table-header {
@@ -48,6 +52,7 @@
   grid-template-columns: 1fr 1fr 1fr;
   padding: var(--spacing-xs) var(--spacing-sm);
   border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background-tertiary);
 }
 
 .order-book__column-header {
@@ -61,8 +66,9 @@
 
 .order-book__sell-orders,
 .order-book__buy-orders {
-  max-height: 150px;
+  flex: 1;
   overflow-y: auto;
+  position: relative;
 }
 
 .order-book__order {
@@ -95,6 +101,9 @@
 .order-book__total {
   position: relative;
   z-index: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .order-book__price--sell {
@@ -126,4 +135,43 @@
 .order-book__spread-price svg {
   color: var(--color-text-secondary);
   font-size: 10px;
+}
+
+/* Loading and error states */
+.order-book--loading,
+.order-book--error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xl);
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  min-height: 300px;
+  height: 100%;
+}
+
+.order-book__spinner {
+  margin-bottom: var(--spacing-md);
+  font-size: var(--font-size-lg);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .order-book {
+    height: auto;
+    min-height: 400px;
+  }
+  
+  .order-book__sell-orders,
+  .order-book__buy-orders {
+    max-height: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .order-book__table-header,
+  .order-book__order {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
 }

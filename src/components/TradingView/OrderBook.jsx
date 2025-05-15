@@ -1,34 +1,91 @@
-import { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronDown, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faArrowUp, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { useTradingPairs } from '../../contexts/TradingPairsContext';
+import { fetchOrderBook } from '../../services/api';
 import './OrderBook.css';
 
 function OrderBook() {
+  const { selectedPair } = useTradingPairs();
   const [activeTab, setActiveTab] = useState('orderbook');
+  const [orderBook, setOrderBook] = useState({ bids: [], asks: [] });
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [depthLimit, setDepthLimit] = useState(10);
   
-  // Generate sample order data
-  const generateOrders = (isSell) => {
-    const orders = [];
-    const basePrice = isSell ? 36920.12 : 36820.12;
+  // Fetch order book data when selected pair changes
+  useEffect(() => {
+    if (!selectedPair) return;
     
-    for (let i = 0; i < 5; i++) {
-      const price = isSell 
-        ? basePrice + (i * 10) 
-        : basePrice - (i * 10);
-      
-      orders.push({
-        price: price.toFixed(2),
-        amount: (0.758965 - (i * 0.01)).toFixed(6),
-        total: (price * (0.758965 - (i * 0.01))).toFixed(2),
-        depth: 30 - (i * 5)
-      });
-    }
+    const loadOrderBook = async () => {
+      try {
+        setIsLoading(true);
+        const data = await fetchOrderBook(selectedPair.symbol, 20);
+        setOrderBook(data);
+        setIsLoading(false);
+      } catch (err) {
+        setError('Failed to load order book data.');
+        setIsLoading(false);
+      }
+    };
     
-    return orders;
+    loadOrderBook();
+    
+    // Set up polling for order book updates
+    const intervalId = setInterval(loadOrderBook, 5000);
+    
+    return () => clearInterval(intervalId);
+  }, [selectedPair]);
+  
+  // Calculate depth percentages
+  const calculateDepth = (orders) => {
+    if (orders.length === 0) return [];
+    
+    const maxTotal = Math.max(...orders.map(order => order.total));
+    
+    return orders.map(order => ({
+      ...order,
+      depthPercent: (order.total / maxTotal) * 100
+    }));
   };
   
-  const sellOrders = generateOrders(true);
-  const buyOrders = generateOrders(false);
+  const bidsWithDepth = calculateDepth(orderBook.bids);
+  const asksWithDepth = calculateDepth(orderBook.asks);
+  
+  // Get the spread between highest bid and lowest ask
+  const getSpread = () => {
+    if (orderBook.bids.length === 0 || orderBook.asks.length === 0) return null;
+    
+    const highestBid = orderBook.bids[0].price;
+    const lowestAsk = orderBook.asks[0].price;
+    const spread = lowestAsk - highestBid;
+    const spreadPercent = (spread / lowestAsk) * 100;
+    
+    return {
+      spread,
+      spreadPercent
+    };
+  };
+  
+  const spread = getSpread();
+  
+  if (isLoading && !orderBook.bids.length) {
+    return (
+      <section className="order-book order-book--loading">
+        <FontAwesomeIcon icon={faSpinner} spin className="order-book__spinner" />
+        <div>Loading order book...</div>
+      </section>
+    );
+  }
+  
+  if (error && !orderBook.bids.length) {
+    return (
+      <section className="order-book order-book--error">
+        <div>{error}</div>
+      </section>
+    );
+  }
   
   return (
     <section className="order-book">
@@ -49,49 +106,65 @@ function OrderBook() {
         </div>
         <div className="order-book__view-selector">
           <div className="order-book__dropdown">
-            <span>10</span>
-            <FontAwesomeIcon icon={faChevronDown} />
+            <span>{depthLimit}</span>
+            <FontAwesomeIcon icon={faChevronDown} onClick={() => setDepthLimit(depthLimit === 10 ? 20 : 10)} />
           </div>
         </div>
       </div>
       
       <div className="order-book__table-header">
-        <div className="order-book__column-header">Price <span>(USD)</span></div>
-        <div className="order-book__column-header">Amounts <span>(BTC)</span></div>
+        <div className="order-book__column-header">Price <span>({selectedPair?.quote})</span></div>
+        <div className="order-book__column-header">Amounts <span>({selectedPair?.base})</span></div>
         <div className="order-book__column-header">Total</div>
       </div>
       
       <div className="order-book__sell-orders">
-        {sellOrders.map((order, index) => (
+        {asksWithDepth.slice(0, depthLimit).map((order, index) => (
           <div key={index} className="order-book__order order-book__order--sell">
-            <div className="order-book__price order-book__price--sell">{order.price}</div>
-            <div className="order-book__amount">{order.amount}</div>
-            <div className="order-book__total">{order.total}</div>
+            <div className="order-book__price order-book__price--sell">
+              {order.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
+            </div>
+            <div className="order-book__amount">
+              {order.amount.toLocaleString(undefined, { minimumFractionDigits: 6, maximumFractionDigits: 8 })}
+            </div>
+            <div className="order-book__total">
+              {order.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
             <div 
               className="order-book__depth order-book__depth--sell"
-              style={{ width: `${order.depth}%` }}
+              style={{ width: `${order.depthPercent}%` }}
             ></div>
           </div>
         ))}
       </div>
       
-      <div className="order-book__spread">
-        <div className="order-book__spread-price">
-          <span style={{ color: 'lightgreen' }}>36,641.20</span>
-          <FontAwesomeIcon icon={faArrowUp} />
-          <span>36,641.20</span>
+      {spread && (
+        <div className="order-book__spread">
+          <div className="order-book__spread-price">
+            <span style={{ color: 'var(--color-accent)' }}>
+              {spread.spread.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
+            </span>
+            <FontAwesomeIcon icon={faArrowUp} />
+            <span>{spread.spreadPercent.toFixed(2)}%</span>
+          </div>
         </div>
-      </div>
+      )}
       
       <div className="order-book__buy-orders">
-        {buyOrders.map((order, index) => (
+        {bidsWithDepth.slice(0, depthLimit).map((order, index) => (
           <div key={index} className="order-book__order order-book__order--buy">
-            <div className="order-book__price order-book__price--buy">{order.price}</div>
-            <div className="order-book__amount">{order.amount}</div>
-            <div className="order-book__total">{order.total}</div>
+            <div className="order-book__price order-book__price--buy">
+              {order.price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 8 })}
+            </div>
+            <div className="order-book__amount">
+              {order.amount.toLocaleString(undefined, { minimumFractionDigits: 6, maximumFractionDigits: 8 })}
+            </div>
+            <div className="order-book__total">
+              {order.total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+            </div>
             <div 
               className="order-book__depth order-book__depth--buy"
-              style={{ width: `${order.depth}%` }}
+              style={{ width: `${order.depthPercent}%` }}
             ></div>
           </div>
         ))}
