@@ -1,0 +1,115 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-xl);
+  background-color: var(--color-background-secondary);
+  height: 60px;
+}
+
+.header__logo-container {
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.header__logo-icon {
+  margin-right: var(--spacing-xs);
+  color: var(--color-text-primary);
+}
+
+.header__nav {
+  margin-left: var(--spacing-lg);
+}
+
+.header__nav-list {
+  display: flex;
+  gap: var(--spacing-xl);
+}
+
+.header__nav-item {
+  position: relative;
+}
+
+.header__nav-item--active::after {
+  content: '';
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-text-primary);
+}
+
+.header__nav-link {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-md);
+  transition: color 0.2s;
+}
+
+.header__nav-item--active .header__nav-link {
+  color: var(--color-text-primary);
+}
+
+.header__user-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-left: auto;
+}
+
+.header__user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background-color: var(--color-background);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: 20px;
+}
+
+.header__user-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #f08080;
+}
+
+.header__user-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.header__user-name {
+  font-size: var(--font-size-sm);
+}
+
+.header__user-icon, .header__language-icon, .header__login-icon {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.header__mobile-menu {
+  display: none;
+  margin-left: auto;
+}
+
+@media (max-width: 768px) {
+  .header__nav {
+    display: none;
+  }
+  
+  .header__mobile-menu {
+    display: block;
+  }
+  
+  .header__user-name {
+    display: none;
+  }
+}

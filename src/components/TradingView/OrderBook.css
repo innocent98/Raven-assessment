@@ -1,0 +1,129 @@
+.order-book {
+  background-color: var(--color-background-secondary);
+  border-radius: var(--border-radius-sm);
+  overflow: hidden;
+}
+
+.order-book__header {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.order-book__tabs {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.order-book__tab {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  transition: color 0.2s ease;
+}
+
+.order-book__tab--active {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.order-book__view-selector {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.order-book__dropdown {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  padding: 0 var(--spacing-sm);
+  height: 24px;
+  border-radius: var(--border-radius-sm);
+  font-size: var(--font-size-xs);
+}
+
+.order-book__table-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.order-book__column-header {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.order-book__column-header span {
+  font-size: 10px;
+}
+
+.order-book__sell-orders,
+.order-book__buy-orders {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.order-book__order {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  position: relative;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.order-book__depth {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  z-index: 0;
+}
+
+.order-book__depth--sell {
+  background-color: rgba(239, 83, 80, 0.1);
+}
+
+.order-book__depth--buy {
+  background-color: rgba(38, 166, 154, 0.1);
+}
+
+.order-book__price,
+.order-book__amount,
+.order-book__total {
+  position: relative;
+  z-index: 1;
+}
+
+.order-book__price--sell {
+  color: var(--color-negative);
+}
+
+.order-book__price--buy {
+  color: var(--color-accent);
+}
+
+.order-book__spread {
+  padding: var(--spacing-xs);
+  text-align: center;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  background-color: var(--color-background-tertiary);
+}
+
+.order-book__spread-price {
+  font-weight: 500;
+  font-size: var(--font-size-xs);
+  font-family: 'Roboto Mono', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.order-book__spread-price svg {
+  color: var(--color-text-secondary);
+  font-size: 10px;
+}

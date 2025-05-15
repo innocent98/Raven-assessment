@@ -1,0 +1,20 @@
+.trading-section {
+  display: grid;
+  grid-template-columns: 1fr 350px 350px;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: var(--color-background);
+}
+
+@media (max-width: 1200px) {
+  .trading-section {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .trading-section {
+    padding: var(--spacing-sm);
+  }
+}

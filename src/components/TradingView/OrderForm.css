@@ -1,0 +1,272 @@
+.order-form {
+  background-color: var(--color-background-secondary);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+  padding: var(--spacing-md);
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-form__tabs {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.order-form__tab-btn {
+  flex: 1;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-md);
+  color: var(--color-text-secondary);
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.2s;
+}
+
+.order-form__tab-btn--active {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--color-accent-hover);
+  border-radius: 10px;
+  color: var(--color-text-primary);
+}
+
+.order-form__types {
+  display: flex;
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-md);
+}
+
+.order-form__type-btn {
+  flex: 1;
+  padding: var(--spacing-xs) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  border-radius: var(--border-radius-sm);
+  transition: background-color 0.2s;
+}
+
+.order-form__type-btn:hover {
+  background-color: var(--color-button-background);
+}
+
+.order-form__type-btn--active {
+  background-color: var(--color-button-background);
+  color: var(--color-text-primary);
+}
+
+.order-form__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  flex: 1;
+  overflow-y: auto;
+}
+
+.order-form__input-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.order-form__label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.order-form__info-icon {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.order-form__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.order-form__input {
+  width: 100%;
+  padding: var(--spacing-sm);
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+}
+
+.order-form__input-suffix {
+  position: absolute;
+  right: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+}
+
+.order-form__percentage-buttons {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.order-form__percentage-buttons button {
+  flex: 1;
+  padding: 4px;
+  font-size: 12px;
+  background-color: var(--color-button-background);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-secondary);
+  transition: all 0.2s;
+}
+
+.order-form__percentage-buttons button:hover {
+  background-color: var(--color-button-hover);
+  color: var(--color-text-primary);
+}
+
+.order-form__select-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.order-form__select {
+  width: 100%;
+  padding: var(--spacing-sm);
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-sm);
+  appearance: none;
+}
+
+.order-form__select-icon {
+  position: absolute;
+  right: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+
+.order-form__checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.order-form__checkbox {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  background-color: var(--color-input-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-sm);
+  position: relative;
+  cursor: pointer;
+}
+
+.order-form__checkbox:checked {
+  background-color: var(--color-deposit-button);
+  border-color: var(--color-deposit-button);
+}
+
+.order-form__checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+}
+
+.order-form__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.order-form__total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.order-form__total-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.order-form__total-value {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+}
+
+.order-form__submit-btn {
+  padding: var(--spacing-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-md);
+  transition: opacity 0.2s;
+}
+
+.order-form__submit-btn:hover {
+  opacity: 0.9;
+}
+
+.order-form__account {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  margin-top: var(--spacing-md);
+}
+
+.order-form__account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order-form__account-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.order-form__account-value {
+  font-size: var(--font-size-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.order-form__currency-select {
+  background: none;
+  border: none;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+}
+
+.trading-form__deposit-btn {
+  padding: var(--spacing-sm);
+  background-color: var(--color-deposit-button);
+  color: var(--color-text-primary);
+  border-radius: var(--border-radius-sm);
+  font-weight: 500;
+  text-align: center;
+  transition: opacity 0.2s ease;
+  font-size: var(--font-size-sm);
+  height: 40px;
+  width: 100px;
+  margin-top: var(--spacing-sm);
+}

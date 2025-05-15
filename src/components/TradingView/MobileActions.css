@@ -1,0 +1,31 @@
+.mobile-actions {
+  display: none;
+  padding: var(--spacing-md);
+  gap: var(--spacing-md);
+  background-color: var(--color-background-secondary);
+}
+
+.mobile-actions__btn {
+  flex: 1;
+  padding: var(--spacing-md);
+  text-align: center;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+}
+
+.mobile-actions__btn--buy {
+  background-color: var(--color-accent);
+  color: var(--color-text-primary);
+}
+
+.mobile-actions__btn--sell {
+  background-color: var(--color-negative);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .mobile-actions {
+    display: flex;
+  }
+}

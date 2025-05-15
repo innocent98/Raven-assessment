@@ -1,0 +1,26 @@
+.mobile-tabs {
+  display: none;
+  background-color: var(--color-background-secondary);
+  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+}
+
+.mobile-tabs__btn {
+  flex: 1;
+  padding: var(--spacing-sm);
+  text-align: center;
+  border-radius: var(--border-radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.mobile-tabs__btn--active {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .mobile-tabs {
+    display: flex;
+  }
+}
