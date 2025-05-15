@@ -194,6 +194,7 @@ input, select {
 .trading-pair__container {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .trading-pair__selector {
